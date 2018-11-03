@@ -1,6 +1,6 @@
 {
   "name": "@wyno/hookis",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Hooks system in javascript",
   "main": "index.js",
   "scripts": {
