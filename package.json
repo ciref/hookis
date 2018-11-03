@@ -1,0 +1,35 @@
+{
+  "name": "@wyno/hookis",
+  "version": "1.0.9",
+  "description": "Hooks system in javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wyno/hookis.git"
+  },
+  "keywords": [
+    "hookis",
+    "hooks",
+    "javascript hooks system",
+    "javascript hooks"
+  ],
+  "author": "Ata amini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wyno/hookis/issues"
+  },
+  "homepage": "https://github.com/wyno/hookis#readme",
+  "devDependencies": {
+    "prettier": "^1.14.3",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "typescript": "^3.1.6"
+  },
+  "dependencies": {}
+}
