@@ -84,8 +84,8 @@ export class Hookis {
         let hooks = this.hooks,
             tempReturnValue = null,
             returnValue = value,
-            callHookHandler = function (handler: any) {
-                tempReturnValue = handler(name, type, params, returnValue);
+            callHookHandler = (handler: any) => {
+                tempReturnValue = handler(params, returnValue);
                 if (!Helpers.isNullOrUndefined(tempReturnValue)) {
                     returnValue = tempReturnValue;
                 }
@@ -109,7 +109,7 @@ export class Hookis {
 
         hooksList.push(hooks['all']['all']);
 
-        hooksList.every(function (handlers) {
+        hooksList.every((handlers) => {
             if (handlers instanceof PriorityList)
                 handlers.forEach(callHookHandler);
             return true;
