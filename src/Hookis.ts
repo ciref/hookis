@@ -7,8 +7,8 @@ import {PriorityList} from "./PriorityList";
  */
 export class Hookis {
     protected hooks: any = {};
-    protected instantHooks: any = {};
-    protected triggeredHooks: any = {};
+    protected instantHooks: any = [];
+    protected triggeredHooks: any = [];
     private static instance: Hookis;
 
     /**
@@ -42,10 +42,10 @@ export class Hookis {
             this.hooks[name][type] = new PriorityList();
         }
 
-        // call if instant and already triggered.
-        if (this.isInstantHook(name, type) && this.isTriggeredHook(name, type))
+        // call if already triggered.
+        if (this.isTriggeredHook(name, type))
             handler(name, type, null, null);
-console.log(`Register hook: ${name} --- ${type}`);
+
         return this.hooks[name][type].insert(handler, priority);
     }
 
@@ -87,7 +87,7 @@ console.log(`Register hook: ${name} --- ${type}`);
         Helpers.assertTypeOf('string', type);
 
         // mark as triggered
-        this.setTriggeredHook(name, type);
+        this.markAsTriggeredHook(name, type);
 
         // default to null if un passed
         value = !Helpers.isNullOrUndefined(value) ? value : null;
@@ -102,24 +102,10 @@ console.log(`Register hook: ${name} --- ${type}`);
                 }
             };
 
-        Helpers.provide([name, type], hooks);
-        Helpers.provide(['all', type], hooks);
-        Helpers.provide([name, 'all'], hooks);
-        Helpers.provide(['all', 'all'], hooks);
-
         let hooksList = [];
+        Helpers.provide([name, type], hooks);
+        hooksList.push(hooks[name][type]);
 
-        if (name != 'all' && type != 'all')
-            hooksList.push(hooks[name][type]);
-
-        if (type != 'all')
-            hooksList.push(hooks['all'][type]);
-
-        if (name != 'all')
-            hooksList.push(hooks[name]['all']);
-
-        hooksList.push(hooks['all']['all']);
-console.log(hooksList);
         hooksList.every((handlers) => {
             if (handlers instanceof PriorityList)
                 handlers.forEach(callHookHandler);
@@ -152,6 +138,31 @@ console.log(hooksList);
     }
 
     /**
+     * Return all registered handlers.
+     * @return any
+     */
+    public getAllHandlers(): any {
+        return this.hooks;
+    }
+
+    /**
+     * Registers a hook as an instant hook.
+     *
+     * After being trigger once, registration of a handler to an instant hook will cause the
+     * handle to be executed immediately.
+     *
+     * @param name name The hook name.
+     * @param type type The hook type.
+     * @return number|boolean integer
+     */
+    public registerInstant(name: string, type: string): boolean | number {
+        Helpers.assertTypeOf('string', name);
+        Helpers.assertTypeOf('string', type);
+
+        return Helpers.pushToObjectArray(this.instantHooks, name, type);
+    }
+
+    /**
      * Is this hook registered as an instant hook?
      *
      * @param {String} name The hook name.
@@ -179,7 +190,7 @@ console.log(hooksList);
      * @param {String} name The hook name.
      * @param {String} type The hook type.
      */
-    protected setTriggeredHook(name: string, type: string) {
+    protected markAsTriggeredHook(name: string, type: string) {
         return Helpers.pushToObjectArray(this.triggeredHooks, name, type);
     };
 }

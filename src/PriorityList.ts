@@ -25,7 +25,7 @@ export class PriorityList {
      */
     public insert(obj: Object, thePriority?: number | any): void {
         let priority = 500;
-        if (arguments.length == 2 && priority !== undefined)
+        if (arguments.length == 2 && thePriority !== undefined)
             priority = parseInt(thePriority, 10);
 
         priority = Math.max(priority, 0);
@@ -47,12 +47,10 @@ export class PriorityList {
         let index = 0;
         this.priorities.forEach(function (elems: any) {
             elems.forEach(function (elem: any) {
-                console.log(elem);
                 callback(elem, index++);
             });
         });
 
         return this;
     };
-
 }

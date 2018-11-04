@@ -20,7 +20,7 @@ export class Helpers {
      * @param pkg
      * @param context
      */
-    public static provide(pkg: any, context: any) {
+    public static provide(pkg: string | any, context: any) {
         let parts,
             optContext = context || Helpers.context,
             part, i;
@@ -99,7 +99,7 @@ export class Helpers {
         if (!(object[parent] instanceof Array))
             object[parent] = [];
 
-        if (object[parent].includes(value))
+        if (!object[parent].includes(value))
             return object[parent].push(value);
 
         return false;
