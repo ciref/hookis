@@ -47,6 +47,7 @@ export class PriorityList {
         let index = 0;
         this.priorities.forEach(function (elems: any) {
             elems.forEach(function (elem: any) {
+                console.log(elem);
                 callback(elem, index++);
             });
         });

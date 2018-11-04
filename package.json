@@ -2,7 +2,8 @@
   "name": "@wyno/hookis",
   "version": "1.0.10",
   "description": "Hooks system in javascript",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc",

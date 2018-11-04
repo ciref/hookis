@@ -9,6 +9,17 @@ export class Hookis {
     protected hooks: any = {};
     protected instantHooks: any = {};
     protected triggeredHooks: any = {};
+    private static instance: Hookis;
+
+    /**
+     * Constructor.
+     * @return any
+     */
+    public constructor() {
+        if (Hookis.instance)
+            return Hookis.instance;
+        Hookis.instance = this;
+    }
 
     /**
      * Registers a hook handler with the event system.
@@ -34,7 +45,7 @@ export class Hookis {
         // call if instant and already triggered.
         if (this.isInstantHook(name, type) && this.isTriggeredHook(name, type))
             handler(name, type, null, null);
-
+console.log(`Register hook: ${name} --- ${type}`);
         return this.hooks[name][type].insert(handler, priority);
     }
 
@@ -108,7 +119,7 @@ export class Hookis {
             hooksList.push(hooks[name]['all']);
 
         hooksList.push(hooks['all']['all']);
-
+console.log(hooksList);
         hooksList.every((handlers) => {
             if (handlers instanceof PriorityList)
                 handlers.forEach(callHookHandler);
