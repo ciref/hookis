@@ -8,7 +8,9 @@
     "test": "jest --config jestconfig.json",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "publish": "npm run build && npm version patch && npm publish --access=public",
+    "link": "npm run build && npm link @ticou/hookis"
   },
   "repository": {
     "type": "git",
