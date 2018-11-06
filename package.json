@@ -1,5 +1,5 @@
 {
-  "name": "@wyno/hookis",
+  "name": "@ticou/hookis",
   "version": "1.0.14",
   "description": "Hooks system in javascript",
   "main": "dist/index.js",
