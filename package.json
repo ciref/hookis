@@ -9,12 +9,12 @@
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
-    "publish": "npm run build && npm version patch && npm publish --access=public",
-    "link": "npm run build && npm link @ticou/hookis"
+    "link": "npm run build && npm link @ticou/hookis",
+    "atda": "npm run build && npm version patch && npm publish --access=public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wyno/hookis.git"
+    "url": "git+https://github.com/ticou/hookis.git"
   },
   "keywords": [
     "hookis",
@@ -25,9 +25,9 @@
   "author": "Ata amini",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wyno/hookis/issues"
+    "url": "https://github.com/ticou/hookis/issues"
   },
-  "homepage": "https://github.com/wyno/hookis#readme",
+  "homepage": "https://github.com/ticou/hookis#readme",
   "devDependencies": {
     "prettier": "^1.14.3",
     "tslint": "^5.11.0",
